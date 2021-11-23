@@ -1,0 +1,7 @@
+name: Survival
+version: 1.0-SNAPSHOT
+main: de.lookonthebrightsi.survival.main.InternalMainClass
+api-version: 1.17
+
+libraries:
+  - "net.axay:kspigot:1.17.4"
