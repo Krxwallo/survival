@@ -2,7 +2,9 @@ package de.hglabor.training.utils.extensions
 
 import org.bukkit.GameMode
 import org.bukkit.Location
+import org.bukkit.Material
 import org.bukkit.Sound
+import org.bukkit.block.BlockFace
 import org.bukkit.entity.Entity
 import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.Player
@@ -39,3 +41,5 @@ fun Player.playSound(sound: Sound, pitch: Number = 1, volume: Number = 1, locati
 
 fun HumanEntity.survival() { this.gameMode = GameMode.SURVIVAL }
 fun HumanEntity.spectator() { this.gameMode = GameMode.SPECTATOR }
+
+fun Player.onGround() = location.block.getRelative(BlockFace.DOWN).type != Material.AIR

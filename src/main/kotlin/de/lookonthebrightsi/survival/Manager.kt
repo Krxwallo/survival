@@ -1,7 +1,5 @@
-package de.lookonthebrightsi.survival.main
+package de.lookonthebrightsi.survival
 
-import de.lookonthebrightsi.survival.commands.commands
-import de.lookonthebrightsi.survival.config.Config
 import net.axay.kspigot.main.KSpigot
 
 val Manager by lazy { InternalMainClass.INSTANCE }
@@ -18,8 +16,7 @@ class InternalMainClass : KSpigot() {
     override fun startup() {
         Config.load()
         commands()
+        events()
     }
 
 }
-
-

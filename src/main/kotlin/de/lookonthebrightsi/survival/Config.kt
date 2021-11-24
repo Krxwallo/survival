@@ -1,7 +1,6 @@
-package de.lookonthebrightsi.survival.config
+package de.lookonthebrightsi.survival
 
 import de.lookonthebrightsi.survival.utils.extensions.world
-import de.lookonthebrightsi.survival.main.Manager
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.extensions.server
 import org.bukkit.ChatColor
@@ -13,7 +12,9 @@ val DEFAULT_LOCATION = Location(world("world"), 0.0, 0.0, 0.0)
 
 
 enum class Config(private val path: String, value: Any) {
-
+    SPAWN_POS_1("spawn_pos_1", DEFAULT_LOCATION),
+    SPAWN_POS_2("spawn_pos_2", DEFAULT_LOCATION),
+    SPAWN_TELEPORTER_POS("spawn_teleporter_pos", DEFAULT_LOCATION),
     ;
 
     private val configValue: Any get() = Manager.config.get(this.path) ?: this.mValue
@@ -28,7 +29,7 @@ enum class Config(private val path: String, value: Any) {
         fun reload() { Manager.reloadConfig() }
     }
 
-    fun set(value: Int) {
+    fun set(value: Any) {
         mValue = value
         Manager.config.set(this.path, value)
         Manager.saveConfig()

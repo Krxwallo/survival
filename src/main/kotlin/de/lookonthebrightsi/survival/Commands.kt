@@ -1,21 +1,13 @@
-package de.lookonthebrightsi.survival.commands
+package de.lookonthebrightsi.survival
 
 import de.hglabor.training.utils.extensions.onlinePlayers
 import de.hglabor.training.utils.sendCommand
-import de.lookonthebrightsi.survival.config.PREFIX
 import net.axay.kspigot.chat.KColors
-import net.axay.kspigot.chat.col
-import net.axay.kspigot.commands.argument
-import net.axay.kspigot.commands.command
-import net.axay.kspigot.commands.requiresPermission
-import net.axay.kspigot.commands.runs
-import net.axay.kspigot.event.listen
+import net.axay.kspigot.commands.*
 import net.axay.kspigot.extensions.broadcast
 import net.axay.kspigot.extensions.bukkit.kick
+import net.axay.kspigot.extensions.geometry.blockLoc
 import net.md_5.bungee.api.ChatColor
-import org.bukkit.Bukkit
-import org.bukkit.event.player.PlayerCommandSendEvent
-import java.lang.Exception
 
 fun commands() {
     command("broadcast") {
@@ -56,6 +48,34 @@ fun commands() {
                 kick("${KColors.RED}Server is restarting")
             }
             sendCommand("stop")
+        }
+    }
+
+    command("survival") {
+        requiresPermission("survival.survival")
+        literal("spawnpos1") {
+            runs {
+                Config.SPAWN_POS_1.set(player.location.blockLoc)
+                player.sendMessage("$PREFIX Set Spawn Pos 1 to your current location.")
+            }
+        }
+        literal("spawnpos2") {
+            runs {
+                Config.SPAWN_POS_2.set(player.location.blockLoc)
+                player.sendMessage("$PREFIX Set Spawn Pos 2 to your current location.")
+            }
+        }
+        literal("spawntppos") {
+            runs {
+                Config.SPAWN_TELEPORTER_POS.set(player.location.blockLoc)
+                player.sendMessage("$PREFIX Set Spawn Teleport Pos to your current location.")
+            }
+        }
+        literal("reload") {
+            runs {
+                Config.reload()
+                player.sendMessage("$PREFIX ${KColors.GREEN}Reloaded config.")
+            }
         }
     }
 }

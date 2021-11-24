@@ -1,6 +1,6 @@
 package de.lookonthebrightsi.survival.utils
 
-import de.lookonthebrightsi.survival.config.PREFIX
+import de.lookonthebrightsi.survival.PREFIX
 import net.axay.kspigot.extensions.broadcast
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor

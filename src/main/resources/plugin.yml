@@ -1,6 +1,6 @@
 name: Survival
 version: 1.0-SNAPSHOT
-main: de.lookonthebrightsi.survival.main.InternalMainClass
+main: de.lookonthebrightsi.survival.InternalMainClass
 api-version: 1.17
 
 libraries:
