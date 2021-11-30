@@ -10,7 +10,6 @@ plugins {
 repositories {
     mavenLocal()
     mavenCentral()
-    jcenter()
     // Spigot
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
     // FAWE
@@ -28,7 +27,7 @@ dependencies {
     // FAWE
     compileOnly("com.intellectualsites.fawe:FAWE-Bukkit:1.16-637")
     // KSPIGOT
-    implementation("net.axay:kspigot:1.17.4")
+    implementation("net.axay:kspigot:1.18.0")
 }
 
 tasks {
