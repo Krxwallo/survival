@@ -13,7 +13,10 @@ import net.axay.kspigot.items.meta
 import org.apache.logging.log4j.core.layout.PatternLayout
 import org.bukkit.Material
 import org.bukkit.entity.Player
+import org.bukkit.event.block.BlockBreakEvent
+import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
+import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityToggleGlideEvent
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.inventory.meta.SkullMeta
@@ -63,6 +66,24 @@ fun events() {
                 }
             })
             it.damager.sendMessage("$PREFIX ${KColors.ORANGERED}You received the player head of ${KColors.WHITE}${it.entity.name}${KColors.ORANGERED}.")
+        }
+    }
+
+    listen<EntityDamageEvent> {
+        if (it.entity is Player && (it.entity as Player).inSpawnRegion()) it.cancel()
+    }
+
+    listen<BlockBreakEvent> {
+        if (it.player.inSpawnRegion()) {
+            it.cancel()
+            it.player.sendMessage("$PREFIX ${KColors.RED}You can't break blocks here")
+        }
+    }
+
+    listen<BlockPlaceEvent> {
+        if (it.player.inSpawnRegion()) {
+            it.cancel()
+            it.player.sendMessage("$PREFIX ${KColors.RED}You can't place blocks here")
         }
     }
 }
