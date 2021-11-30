@@ -3,8 +3,15 @@
 group = "de.lookonthebrightsi"
 version = "0.0.1"
 
+buildscript {
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0")
+    }
+}
+
 plugins {
-    kotlin("jvm") version "1.5.10"
+    kotlin("jvm") version "1.6.0"
+    kotlin("plugin.serialization") version "1.6.0"
 }
 
 repositories {
@@ -27,15 +34,22 @@ dependencies {
     // FAWE
     compileOnly("com.intellectualsites.fawe:FAWE-Bukkit:1.16-637")
     // KSPIGOT
-    implementation("net.axay:kspigot:1.18.0")
+    implementation("net.axay:kspigot:1.17.4")
+
+    api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.6.0-RC")
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
 }
 
 tasks {
-    compileJava {
-        options.release.set(17)
+    withType<JavaCompile> {
         options.encoding = "UTF-8"
+        options.release.set(17)
     }
-    compileKotlin {
+
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions.jvmTarget = "17"
     }
 }
