@@ -2,14 +2,21 @@ package de.lookonthebrightsi.survival
 
 import de.hglabor.training.utils.extensions.cancel
 import de.hglabor.training.utils.extensions.onGround
+import de.lookonthebrightsi.survival.utils.extensions.stack
 import de.lookonthebrightsi.survival.utils.extensions.world
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.event.listen
 import net.axay.kspigot.extensions.bukkit.actionBar
+import net.axay.kspigot.extensions.bukkit.give
 import net.axay.kspigot.extensions.geometry.blockLoc
+import net.axay.kspigot.items.meta
+import org.apache.logging.log4j.core.layout.PatternLayout
+import org.bukkit.Material
 import org.bukkit.entity.Player
+import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityToggleGlideEvent
 import org.bukkit.event.player.PlayerMoveEvent
+import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.util.Vector
 
 fun events() {
@@ -44,5 +51,18 @@ fun events() {
 
     listen<EntityToggleGlideEvent> {
         if (it.entity is Player && (it.entity as Player).properties.gliding) it.cancel()
+    }
+
+    listen<EntityDamageByEntityEvent> {
+        if (it.damager is Player && it.entity is Player && (it.entity as Player).health - it.damage <= 0) {
+            // Player was killed by another player
+            // Drop head
+            (it.damager as Player).give(Material.PLAYER_HEAD.stack().apply {
+                meta<SkullMeta> {
+                    owningPlayer = it.entity as Player
+                }
+            })
+            it.damager.sendMessage("$PREFIX ${KColors.ORANGERED}You received the player head of ${KColors.WHITE}${it.entity.name}${KColors.ORANGERED}.")
+        }
     }
 }

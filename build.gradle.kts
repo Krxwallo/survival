@@ -11,10 +11,8 @@ repositories {
     mavenLocal()
     mavenCentral()
     jcenter()
-    // Paper
-    maven("https://papermc.io/repo/repository/maven-public/")
-    maven("https://repo.codemc.io/repository/maven-snapshots/")
-    maven("https://repo.codemc.io/repository/maven-public/")
+    // Spigot
+    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
     // FAWE
     maven("https://mvn.intellectualsites.com/content/repositories/releases/")
     // CloudNet
@@ -24,9 +22,9 @@ repositories {
 dependencies {
     implementation(kotlin("reflect"))
     // CraftBukkit
-    compileOnly("org.bukkit", "craftbukkit", "1.17-R0.1-SNAPSHOT")
+    compileOnly("org.bukkit", "craftbukkit", "1.18-rc3-R0.1-SNAPSHOT")
     // PAPER
-    compileOnly("io.papermc.paper:paper-api:1.17-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.18-rc3-R0.1-SNAPSHOT")
     // FAWE
     compileOnly("com.intellectualsites.fawe:FAWE-Bukkit:1.16-637")
     // KSPIGOT
@@ -35,10 +33,10 @@ dependencies {
 
 tasks {
     compileJava {
-        options.release.set(16)
+        options.release.set(17)
         options.encoding = "UTF-8"
     }
     compileKotlin {
-        kotlinOptions.jvmTarget = "16"
+        kotlinOptions.jvmTarget = "17"
     }
 }
