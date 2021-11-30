@@ -2,6 +2,7 @@ package de.lookonthebrightsi.survival
 
 import de.hglabor.training.utils.extensions.cancel
 import de.hglabor.training.utils.extensions.onGround
+import de.hglabor.training.utils.sendCommand
 import de.lookonthebrightsi.survival.utils.extensions.stack
 import de.lookonthebrightsi.survival.utils.extensions.world
 import net.axay.kspigot.chat.KColors
@@ -10,15 +11,16 @@ import net.axay.kspigot.extensions.bukkit.actionBar
 import net.axay.kspigot.extensions.bukkit.give
 import net.axay.kspigot.extensions.geometry.blockLoc
 import net.axay.kspigot.items.meta
-import org.apache.logging.log4j.core.layout.PatternLayout
+import org.bukkit.GameMode
 import org.bukkit.Material
+import org.bukkit.Statistic
 import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
-import org.bukkit.event.entity.EntityDamageByEntityEvent
-import org.bukkit.event.entity.EntityDamageEvent
-import org.bukkit.event.entity.EntityToggleGlideEvent
+import org.bukkit.event.entity.*
+import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerMoveEvent
+import org.bukkit.event.player.PlayerRespawnEvent
 import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.util.Vector
 
@@ -74,16 +76,35 @@ fun events() {
     }
 
     listen<BlockBreakEvent> {
-        if (it.player.inSpawnRegion()) {
+        if (it.player.inSpawnRegion() && it.player.gameMode == GameMode.SURVIVAL) {
             it.cancel()
             it.player.sendMessage("$PREFIX ${KColors.RED}You can't break blocks here")
         }
     }
 
     listen<BlockPlaceEvent> {
-        if (it.player.inSpawnRegion()) {
+        if (it.player.inSpawnRegion() && it.player.gameMode == GameMode.SURVIVAL) {
             it.cancel()
             it.player.sendMessage("$PREFIX ${KColors.RED}You can't place blocks here")
         }
     }
+
+    listen<PlayerRespawnEvent> {
+        // Fix respawn location
+        if (it.respawnLocation.inSpawnRegion()) it.respawnLocation = it.respawnLocation.world!!.spawnLocation
+    }
+
+    listen<PlayerDeathEvent> {
+        it.entity.updateSuffix()
+    }
+
+    listen<PlayerJoinEvent> {
+        it.player.updateSuffix()
+    }
+}
+
+
+fun Player.updateSuffix() {
+    sendCommand("lp user $name meta removesuffix 100")
+    sendCommand("lp user $name meta addsuffix 100 \"[${getStatistic(Statistic.DEATHS)}]\"")
 }
