@@ -59,7 +59,7 @@ fun events() {
     }
 
     listen<EntityDamageByEntityEvent> {
-        if (it.damager is Player && it.entity is Player && (it.entity as Player).health - it.damage <= 0) {
+        if (it.damager is Player && it.entity is Player && (it.entity as Player).health - it.finalDamage <= 0) {
             // Player was killed by another player
             // Drop head
             (it.damager as Player).give(Material.PLAYER_HEAD.stack().apply {
@@ -106,5 +106,5 @@ fun events() {
 
 fun Player.updateSuffix() {
     sendCommand("lp user $name meta removesuffix 100")
-    sendCommand("lp user $name meta addsuffix 100 \"[${getStatistic(Statistic.DEATHS)}]\"")
+    sendCommand("lp user $name meta addsuffix 100 \"[${getStatistic(Statistic.DEATHS)}] \"")
 }
