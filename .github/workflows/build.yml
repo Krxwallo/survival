@@ -34,4 +34,3 @@ jobs:
         prerelease: true
         title: "Development Build"
         files: build/libs/survival-*.jar
-        files-ignore: build/libs/*-dev.jar
