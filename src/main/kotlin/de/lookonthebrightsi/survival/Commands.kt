@@ -156,6 +156,6 @@ fun commands() {
 
 fun Player.setPrefix(prefix: String) {
     sendCommand("lp user $name meta removeprefix 100")
-    sendCommand("lp user $name meta addprefix 100 $prefix")
+    sendCommand("lp user $name meta addprefix 100 \"$prefix\"")
     sendMessage("$PREFIX ${KColors.SPRINGGREEN}Your prefix was changed to $prefix")
 }
