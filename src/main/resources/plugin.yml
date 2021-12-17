@@ -4,6 +4,5 @@ main: de.lookonthebrightsi.survival.InternalMainClass
 api-version: 1.18
 
 libraries:
-  #- "net.axay:kspigot:1.17.4" # XD
-  - "org.jetbrains.kotlin:kotlin-stdlib:1.6.0"
-  - "org.jetbrains.ktolin:kotlinx-coroutines-core:1.6.0-RC"
+  - "net.axay:kspigot:1.18.0"
+  - "org.jetbrains.kotlin:kotlin-reflect:1.6.0"
