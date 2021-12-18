@@ -11,11 +11,13 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven("https://maven.enginehub.org/repo/")
 }
 
 dependencies {
     paperDevBundle("1.18.1-R0.1-SNAPSHOT")
     implementation("net.axay:kspigot:1.18.0")
+    implementation("de.hglabor.utils:kutils:0.0.2")
     implementation(kotlin("reflect"))
 }
 

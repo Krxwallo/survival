@@ -1,10 +1,6 @@
 package de.lookonthebrightsi.survival
 
-import de.hglabor.training.utils.extensions.cancel
-import de.hglabor.training.utils.extensions.onGround
-import de.hglabor.training.utils.sendCommand
-import de.lookonthebrightsi.survival.utils.extensions.stack
-import de.lookonthebrightsi.survival.utils.extensions.world
+import de.hglabor.utils.kutils.*
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.event.listen
 import net.axay.kspigot.extensions.bukkit.actionBar
@@ -26,16 +22,15 @@ import org.bukkit.util.Vector
 
 fun events() {
     listen<PlayerMoveEvent> { with(it) {
-        to ?: return@listen
         // Check if player only moved mouse
-        if (to!!.distanceSquared(from) == 0.0) return@listen
+        if (to.distanceSquared(from) == 0.0) return@listen
         // Spawn Checks
-        if (!player.properties.inSpawn && to!!.inSpawnRegion()) {
+        if (!player.properties.inSpawn && to.inSpawnRegion()) {
             // player entered spawn
             player.actionBar("${KColors.GREEN}Entering spawn region")
             player.properties.inSpawn = true
         }
-        else if (player.properties.inSpawn && !to!!.inSpawnRegion()) {
+        else if (player.properties.inSpawn && !to.inSpawnRegion()) {
             // player left spawn
             player.actionBar("${KColors.RED}Leaving spawn region")
             player.properties.inSpawn = false

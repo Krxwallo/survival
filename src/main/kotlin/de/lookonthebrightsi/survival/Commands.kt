@@ -1,7 +1,7 @@
 package de.lookonthebrightsi.survival
 
-import de.hglabor.training.utils.extensions.onlinePlayers
-import de.hglabor.training.utils.sendCommand
+import de.hglabor.utils.kutils.onlinePlayers
+import de.hglabor.utils.kutils.sendCommand
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.commands.*
 import net.axay.kspigot.extensions.broadcast

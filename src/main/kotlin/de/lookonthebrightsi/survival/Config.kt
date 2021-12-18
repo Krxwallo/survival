@@ -1,6 +1,6 @@
 package de.lookonthebrightsi.survival
 
-import de.lookonthebrightsi.survival.utils.extensions.world
+import de.hglabor.utils.kutils.world
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.extensions.server
 import org.bukkit.ChatColor
