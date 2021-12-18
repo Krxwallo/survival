@@ -1,7 +1,7 @@
 @file:Suppress("PropertyName")
 
 group = "de.lookonthebrightsi"
-version = "0.0.1"
+version = "0.0.2"
 
 plugins {
     kotlin("jvm") version "1.6.0"
