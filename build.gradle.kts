@@ -11,7 +11,6 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven("https://maven.enginehub.org/repo/")
 }
 
 dependencies {
