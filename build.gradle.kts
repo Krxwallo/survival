@@ -1,11 +1,13 @@
+@file:Suppress("GradlePackageUpdate")
+
 group = "de.lookonthebrightsi"
-version = "0.0.2"
-val kspigot = "1.18.0"
-val kutils = "0.0.2"
+version = "1.17-0.0.2"
+val kspigot = "1.17.4"
+val kutils = "0.0.19"
 
 plugins {
     kotlin("jvm") version "1.6.0"
-    id("io.papermc.paperweight.userdev") version "1.3.2"
+    id("com.github.johnrengelman.shadow") version "6.1.0"
     id("net.minecrell.plugin-yml.bukkit") version "0.5.1"
 }
 
@@ -13,28 +15,26 @@ bukkit {
     main = "de.lookonthebrightsi.survival.InternalMainClass"
     website = "https://github.com/Krxwallo/survival"
     version = project.version.toString()
-    apiVersion = "1.18"
+    apiVersion = "1.17"
     authors = listOf("Krxwallo")
-    libraries = listOf(
-        "net.axay:kspigot:$kspigot",
-        "de.hglabor.utils:kutils:$kutils"
-    )
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
+    maven("https://papermc.io/repo/repository/maven-public/")
+    maven("https://repo.codemc.io/repository/maven-snapshots/")
+    maven("https://repo.codemc.io/repository/maven-public/")
 }
 
 dependencies {
-    paperDevBundle("1.18.1-R0.1-SNAPSHOT")
+    compileOnly("org.bukkit", "craftbukkit", "1.17-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.17-R0.1-SNAPSHOT")
     implementation("net.axay:kspigot:$kspigot")
     implementation("de.hglabor.utils:kutils:$kutils")
 }
 
 tasks {
-    build {
-        dependsOn(reobfJar)
-    }
     compileJava {
         options.encoding = "UTF-8"
         options.release.set(17)
@@ -42,4 +42,8 @@ tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "17"
     }
+}
+
+fun com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar.simpleRelocate(pattern: String) {
+    relocate(pattern, "${project.group}.${project.name.toLowerCase()}.shadow.$pattern")
 }

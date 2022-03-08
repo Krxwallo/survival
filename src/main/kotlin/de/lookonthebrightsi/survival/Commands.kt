@@ -29,7 +29,7 @@ fun commands() {
                         broadcast("$PREFIX ${ChatColor.of(getArgument<String>("color"))}${KColors.BOLD}${getArgument<String>("message")}" )
                     }
                     catch (e: IllegalArgumentException) {
-                        sender.bukkitSender.sendMessage("$PREFIX ${KColors.RED}Could not parse color ${KColors.WHITE}$color ${KColors.RED}.")
+                        sender.sendMessage("$PREFIX ${KColors.RED}Could not parse color ${KColors.WHITE}$color ${KColors.RED}.")
                     }
                 }
             }
@@ -78,7 +78,7 @@ fun commands() {
         literal("reload") {
             runs {
                 Config.reload()
-                sender.bukkitSender.sendMessage("$PREFIX ${KColors.GREEN}Reloaded config.")
+                sender.sendMessage("$PREFIX ${KColors.GREEN}Reloaded config.")
             }
         }
 
@@ -87,7 +87,7 @@ fun commands() {
                 argument<String>("amount") {
                     runs {
                         Bukkit.getPlayer(getArgument<String>("player"))?.setStatistic(Statistic.DEATHS, getArgument<String>("amount").toInt())
-                            ?: sender.bukkitSender.sendMessage("$PREFIX ${KColors.RED}Could not find player with name ${KColors.WHITE}${getArgument<String>("player")}${KColors.RED}.")
+                            ?: sender.sendMessage("$PREFIX ${KColors.RED}Could not find player with name ${KColors.WHITE}${getArgument<String>("player")}${KColors.RED}.")
                     }
                 }
             }
@@ -100,7 +100,7 @@ fun commands() {
             player.apply {
                 heal()
                 feedSaturate()
-                sender.bukkitSender.sendMessage("$PREFIX ${KColors.GREEN}You got healed.")
+                sender.sendMessage("$PREFIX ${KColors.GREEN}You got healed.")
             }
         }
         argument<String>("player") {
@@ -112,7 +112,7 @@ fun commands() {
                     this@runs.player.sendMessage("$PREFIX ${KColors.GREEN}Healed $name.")
                     sendMessage("$PREFIX ${KColors.GREEN}You got healed.")
                 } ?: run {
-                    sender.bukkitSender.sendMessage("$PREFIX ${KColors.RED}Unknown player: ${KColors.WHITE}$playerName")
+                    sender.sendMessage("$PREFIX ${KColors.RED}Unknown player: ${KColors.WHITE}$playerName")
                 }
             }
         }
@@ -122,7 +122,7 @@ fun commands() {
         requiresPermission("survival.day")
         runs {
             sendCommand("time set day")
-            sender.bukkitSender.sendMessage("$PREFIX ${KColors.GREEN}Set the time to day.")
+            sender.sendMessage("$PREFIX ${KColors.GREEN}Set the time to day.")
         }
     }
 
@@ -130,7 +130,7 @@ fun commands() {
         requiresPermission("survival.night")
         runs {
             sendCommand("time set night")
-            sender.bukkitSender.sendMessage("$PREFIX ${KColors.ORANGE}Set the time to night.")
+            sender.sendMessage("$PREFIX ${KColors.ORANGE}Set the time to night.")
         }
     }
     command("prefix") {

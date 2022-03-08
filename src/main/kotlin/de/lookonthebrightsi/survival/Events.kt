@@ -1,11 +1,11 @@
 package de.lookonthebrightsi.survival
 
-import de.hglabor.utils.kutils.*
+import de.hglabor.utils.kutils.cancel
+import de.hglabor.utils.kutils.sendCommand
+import de.hglabor.utils.kutils.stack
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.event.listen
-import net.axay.kspigot.extensions.bukkit.actionBar
 import net.axay.kspigot.extensions.bukkit.give
-import net.axay.kspigot.extensions.geometry.blockLoc
 import net.axay.kspigot.items.meta
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -13,24 +13,26 @@ import org.bukkit.Statistic
 import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
-import org.bukkit.event.entity.*
+import org.bukkit.event.entity.EntityDamageByEntityEvent
+import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.entity.EntityToggleGlideEvent
+import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerRespawnEvent
 import org.bukkit.inventory.meta.SkullMeta
-import org.bukkit.util.Vector
 
 fun events() {
-    listen<PlayerMoveEvent> { with(it) {
+/*    listen<PlayerMoveEvent> { with(it) {
+        to ?: return@listen
         // Check if player only moved mouse
-        if (to.distanceSquared(from) == 0.0) return@listen
+        if (to!!.distanceSquared(from) == 0.0) return@listen
         // Spawn Checks
-        if (!player.properties.inSpawn && to.inSpawnRegion()) {
+        if (!player.properties.inSpawn && to!!.inSpawnRegion()) {
             // player entered spawn
             player.actionBar("${KColors.GREEN}Entering spawn region")
             player.properties.inSpawn = true
         }
-        else if (player.properties.inSpawn && !to.inSpawnRegion()) {
+        else if (player.properties.inSpawn && !to!!.inSpawnRegion()) {
             // player left spawn
             player.actionBar("${KColors.RED}Leaving spawn region")
             player.properties.inSpawn = false
@@ -47,7 +49,7 @@ fun events() {
 
         // Check spawn teleporter
         if (player.location.blockLoc == Config.SPAWN_TELEPORTER_POS.getLocation()) player.teleport(world("world")!!.spawnLocation)
-    }}
+    }}*/
 
     listen<EntityToggleGlideEvent> {
         if (it.entity is Player && (it.entity as Player).properties.gliding) it.cancel()
