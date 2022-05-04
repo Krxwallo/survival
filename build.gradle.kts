@@ -1,7 +1,7 @@
 group = "de.lookonthebrightsi"
-version = "0.0.2"
-val kspigot = "1.18.0"
-val kutils = "0.0.2"
+version = "1.18.2-0.0.3"
+val kspigot = "1.18.2"
+val kutils = "0.0.20"
 
 plugins {
     kotlin("jvm") version "1.6.0"
@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-    paperDevBundle("1.18.1-R0.1-SNAPSHOT")
+    paperDevBundle("1.18.2-R0.1-SNAPSHOT")
     implementation("net.axay:kspigot:$kspigot")
     implementation("de.hglabor.utils:kutils:$kutils")
 }
