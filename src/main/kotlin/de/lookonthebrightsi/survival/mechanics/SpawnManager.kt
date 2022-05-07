@@ -100,8 +100,6 @@ object SpawnManager {
             player.properties.inSpawn = true
             player.isGliding = false
             player.properties.gliding = false
-
-            player.velocity = vec()
         }
 
         fun leave(glide: Boolean = true) {

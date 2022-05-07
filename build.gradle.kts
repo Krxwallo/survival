@@ -1,5 +1,5 @@
 group = "de.lookonthebrightsi"
-version = "1.18.2-0.0.4"
+version = "1.18.2-1.0.0"
 val kspigot = "1.18.2"
 val kutils = "0.0.20"
 
