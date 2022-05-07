@@ -1,9 +1,6 @@
 package de.lookonthebrightsi.survival
 
-import de.lookonthebrightsi.survival.mechanics.DeathCounter
-import de.lookonthebrightsi.survival.mechanics.PlayerHeads
-import de.lookonthebrightsi.survival.mechanics.SpawnManager
-import de.lookonthebrightsi.survival.mechanics.SwordFeature
+import de.lookonthebrightsi.survival.mechanics.*
 import net.axay.kspigot.main.KSpigot
 
 val Manager by lazy { InternalMainClass.INSTANCE }
@@ -27,6 +24,7 @@ class InternalMainClass : KSpigot() {
         PlayerHeads
         SpawnManager
         SwordFeature
+        ChatManager
     }
 
     fun reload() {

@@ -2,6 +2,7 @@ package de.lookonthebrightsi.survival
 
 import de.hglabor.utils.kutils.onlinePlayers
 import de.hglabor.utils.kutils.sendCommand
+import de.lookonthebrightsi.survival.mechanics.DeathCounter
 import net.axay.kspigot.commands.*
 import net.axay.kspigot.extensions.broadcast
 import net.axay.kspigot.extensions.bukkit.feedSaturate
@@ -9,7 +10,6 @@ import net.axay.kspigot.extensions.bukkit.heal
 import net.axay.kspigot.extensions.geometry.blockLoc
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.Bukkit
-import org.bukkit.Statistic
 import org.bukkit.entity.Player
 
 fun commands() {
@@ -83,12 +83,12 @@ fun commands() {
 
         literal("setdeaths") {
             argument<String>("player") {
-                argument<String>("amount") {
+                argument<Int>("amount") {
                     runs {
-                        Bukkit.getPlayer(getArgument<String>("player"))?.also { p ->
-                            p.setStatistic(Statistic.DEATHS, getArgument<String>("amount").toInt())
-                            sender.bukkitSender.sendMessage("$PREFIX ${org.bukkit.ChatColor.GREEN}")
-                        } ?: sender.bukkitSender.sendMessage("$PREFIX ${org.bukkit.ChatColor.RED}Could not find player with name ${org.bukkit.ChatColor.WHITE}${getArgument<String>("player")}${org.bukkit.ChatColor.RED}.")
+                        Bukkit.getOfflinePlayer(getArgument<String>("player")).also { p ->
+                            DeathCounter.setDeaths(p, getArgument("amount"))
+                            sender.bukkitSender.sendMessage("$PREFIX ${org.bukkit.ChatColor.GREEN}Set deaths for ${p.name} to ${getArgument<Int>("amount")}.")
+                        }
                     }
                 }
             }
