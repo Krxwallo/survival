@@ -1,13 +1,10 @@
 package de.lookonthebrightsi.survival
 
 import de.hglabor.utils.kutils.world
-import net.axay.kspigot.chat.KColors
-import net.axay.kspigot.extensions.server
 import org.bukkit.ChatColor
 import org.bukkit.Location
 
-val PREFIX: String = "${KColors.DARKGRAY}[${ChatColor.AQUA}${KColors.BOLD}Server${ChatColor.DARK_GRAY}]${ChatColor.WHITE}"
-val MAX_PLAYERS: Int = server.maxPlayers
+val PREFIX: String = "${ChatColor.DARK_GRAY}[${ChatColor.AQUA}${ChatColor.BOLD}Server${ChatColor.DARK_GRAY}]${ChatColor.WHITE}"
 val DEFAULT_LOCATION = Location(world("world"), 0.0, 0.0, 0.0)
 
 
@@ -15,6 +12,8 @@ enum class Config(private val path: String, value: Any) {
     SPAWN_POS_1("spawn_pos_1", DEFAULT_LOCATION),
     SPAWN_POS_2("spawn_pos_2", DEFAULT_LOCATION),
     SPAWN_TELEPORTER_POS("spawn_teleporter_pos", DEFAULT_LOCATION),
+    SPAWN_PROT_RADIUS("spawn_prot_radius", 50),
+    SWORD_FEATURE_POS("sword_feature_pos", DEFAULT_LOCATION),
     ;
 
     private val configValue: Any get() = Manager.config.get(this.path) ?: this.mValue
@@ -26,7 +25,9 @@ enum class Config(private val path: String, value: Any) {
             Manager.config.options().copyDefaults(true)
             Manager.saveConfig()
         }
-        fun reload() { Manager.reloadConfig() }
+        fun reload() {
+            Manager.reload()
+        }
     }
 
     fun set(value: Any) {

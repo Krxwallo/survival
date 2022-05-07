@@ -2,7 +2,6 @@ package de.lookonthebrightsi.survival
 
 import org.bukkit.entity.Player
 import java.util.*
-import kotlin.collections.HashMap
 
 
 data class PlayerProperties(var inSpawn: Boolean, var gliding: Boolean, var goingToSpawn: Boolean)
