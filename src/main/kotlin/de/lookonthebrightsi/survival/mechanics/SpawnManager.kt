@@ -10,8 +10,6 @@ import net.axay.kspigot.runnables.taskRun
 import net.axay.kspigot.runnables.taskRunLater
 import org.bukkit.ChatColor
 import org.bukkit.GameMode
-import org.bukkit.Location
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPig
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Pig
 import org.bukkit.entity.Player
@@ -149,10 +147,6 @@ object SpawnManager {
             }
             teleportAnimation(player)
         }
-    }
-
-    private fun Pig.teleportWithPassenger(location: Location) {
-        (this as CraftPig).handle.teleportTo(location.x, location.y, location.z)
     }
 
     private fun teleportAnimation(player: Player) {
