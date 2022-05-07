@@ -1,5 +1,7 @@
 package de.lookonthebrightsi.survival
 
+import de.lookonthebrightsi.survival.mechanics.DeathCounter
+import de.lookonthebrightsi.survival.mechanics.PlayerHeads
 import net.axay.kspigot.main.KSpigot
 
 val Manager by lazy { InternalMainClass.INSTANCE }
@@ -17,6 +19,11 @@ class InternalMainClass : KSpigot() {
         Config.load()
         commands()
         events()
+
+        // Mechanics
+        DeathCounter
+        PlayerHeads
+        //SpawnManager
     }
 
 }

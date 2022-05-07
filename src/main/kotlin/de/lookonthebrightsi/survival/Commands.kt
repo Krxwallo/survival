@@ -11,6 +11,7 @@ import net.axay.kspigot.extensions.geometry.blockLoc
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.Bukkit
 import org.bukkit.Statistic
+import org.bukkit.craftbukkit.v1_18_R2.CraftStatistic.setStatistic
 import org.bukkit.entity.Player
 
 fun commands() {
@@ -86,8 +87,10 @@ fun commands() {
             argument<String>("player") {
                 argument<String>("amount") {
                     runs {
-                        Bukkit.getPlayer(getArgument<String>("player"))?.setStatistic(Statistic.DEATHS, getArgument<String>("amount").toInt())
-                            ?: sender.bukkitSender.sendMessage("$PREFIX ${KColors.RED}Could not find player with name ${KColors.WHITE}${getArgument<String>("player")}${KColors.RED}.")
+                        Bukkit.getPlayer(getArgument<String>("player"))?.also { p ->
+                            p.setStatistic(Statistic.DEATHS, getArgument<String>("amount").toInt())
+                            sender.bukkitSender.sendMessage("$PREFIX ${KColors.GREEN}")
+                        } ?: sender.bukkitSender.sendMessage("$PREFIX ${KColors.RED}Could not find player with name ${KColors.WHITE}${getArgument<String>("player")}${KColors.RED}.")
                     }
                 }
             }
@@ -118,22 +121,7 @@ fun commands() {
         }
     }
 
-    command("day") {
-        requiresPermission("survival.day")
-        runs {
-            sendCommand("time set day")
-            sender.bukkitSender.sendMessage("$PREFIX ${KColors.GREEN}Set the time to day.")
-        }
-    }
-
-    command("night") {
-        requiresPermission("survival.night")
-        runs {
-            sendCommand("time set night")
-            sender.bukkitSender.sendMessage("$PREFIX ${KColors.ORANGE}Set the time to night.")
-        }
-    }
-    command("prefix") {
+    /*command("prefix") {
         literal("remove") {
             runs {
                 sendCommand("lp user ${player.name} meta removeprefix 100")
@@ -151,7 +139,7 @@ fun commands() {
                 }
             }
         }
-    }
+    }*/
 }
 
 fun Player.setPrefix(prefix: String) {

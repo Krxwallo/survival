@@ -6,8 +6,7 @@ import net.axay.kspigot.extensions.server
 import org.bukkit.ChatColor
 import org.bukkit.Location
 
-val PREFIX: String = "${KColors.DARKGRAY}[${ChatColor.AQUA}${KColors.BOLD}Server${ChatColor.DARK_GRAY}]${ChatColor.WHITE}"
-val MAX_PLAYERS: Int = server.maxPlayers
+val PREFIX: String = "${ChatColor.DARK_GRAY}[${ChatColor.AQUA}${KColors.BOLD}Server${ChatColor.DARK_GRAY}]${ChatColor.WHITE}"
 val DEFAULT_LOCATION = Location(world("world"), 0.0, 0.0, 0.0)
 
 
