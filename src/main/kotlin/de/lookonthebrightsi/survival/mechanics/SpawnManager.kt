@@ -5,24 +5,19 @@ import de.lookonthebrightsi.survival.*
 import net.axay.kspigot.event.listen
 import net.axay.kspigot.extensions.bukkit.actionBar
 import net.axay.kspigot.extensions.geometry.*
+import net.axay.kspigot.particles.particle
 import net.axay.kspigot.runnables.task
 import net.axay.kspigot.runnables.taskRun
 import net.axay.kspigot.runnables.taskRunLater
 import org.bukkit.ChatColor
 import org.bukkit.GameMode
-import org.bukkit.entity.EntityType
-import org.bukkit.entity.Pig
-import org.bukkit.entity.Player
+import org.bukkit.Particle
+import org.bukkit.entity.*
 import org.bukkit.event.block.BlockBreakEvent
+import org.bukkit.event.block.BlockGrowEvent
 import org.bukkit.event.block.BlockPlaceEvent
-import org.bukkit.event.entity.EntityDamageEvent
-import org.bukkit.event.entity.EntityToggleGlideEvent
-import org.bukkit.event.entity.ExplosionPrimeEvent
-import org.bukkit.event.entity.FoodLevelChangeEvent
-import org.bukkit.event.player.PlayerGameModeChangeEvent
-import org.bukkit.event.player.PlayerMoveEvent
-import org.bukkit.event.player.PlayerQuitEvent
-import org.bukkit.event.player.PlayerRespawnEvent
+import org.bukkit.event.entity.*
+import org.bukkit.event.player.*
 import org.bukkit.event.vehicle.VehicleExitEvent
 import kotlin.math.max
 
@@ -42,6 +37,14 @@ object SpawnManager {
 
         listen<EntityDamageEvent> {
             if (it.entity is Player && (it.entity as Player).inSpawnRegion()) it.cancel()
+        }
+
+        listen<EntitySpawnEvent> {
+            if (it.entity.entitySpawnReason == CreatureSpawnEvent.SpawnReason.NATURAL && it.entity.location.inSpawnProt()) it.cancel()
+        }
+
+        listen<EntityDamageByEntityEvent> {
+            if (it.entity is EnderCrystal && it.entity.location.inSpawnProt() && !it.damager.isCreative()) it.cancel()
         }
 
         listen<BlockBreakEvent> {
@@ -73,6 +76,10 @@ object SpawnManager {
             it.player.bedSpawnLocation ?: run { it.respawnLocation = it.respawnLocation.world!!.spawnLocation.clone().add(0.5, 0, 0.5) }
         }
 
+        listen<BlockGrowEvent> {
+            if  (it.block.location.inSpawnProt()) it.cancel()
+        }
+
         listen<VehicleExitEvent> {
             if (it.exited !is Player) return@listen
             val player = it.exited as Player
@@ -88,6 +95,10 @@ object SpawnManager {
                 it.player.teleport(world("world")!!.spawnLocation)
                 it.player.properties.goingToSpawn = false
             }
+        }
+
+        listen<PlayerInteractAtEntityEvent> {
+            if (it.rightClicked is ArmorStand && it.rightClicked.location.inSpawnProt()) it.cancel()
         }
     }
 
@@ -155,6 +166,11 @@ object SpawnManager {
         pig.setAI(true)
         pig.addPassenger(player)
         pig.isInvisible = true
+
+        // Explosion particles
+        location.particle(Particle.EXPLOSION_NORMAL) {
+            amount = Config.TELEPORT_ANIMATION_PARTICLES.getInt()
+        }
 
         task(period = 1) {
             pig.velocity = vecY(1)
