@@ -15,6 +15,7 @@ import org.bukkit.Particle
 import org.bukkit.entity.*
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockGrowEvent
+import org.bukkit.event.block.BlockPhysicsEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.*
 import org.bukkit.event.player.*
@@ -45,6 +46,18 @@ object SpawnManager {
 
         listen<EntityDamageByEntityEvent> {
             if (it.entity is EnderCrystal && it.entity.location.inSpawnProt() && !it.damager.isCreative()) it.cancel()
+        }
+
+        listen<PlayerBucketEmptyEvent> {
+            if (it.blockClicked.location.inSpawnProt()) it.cancel()
+        }
+
+        listen<PlayerBucketFillEvent> {
+            if (it.blockClicked.location.inSpawnProt()) it.cancel()
+        }
+
+        listen<BlockPhysicsEvent> {
+            if (it.block.location.inSpawnProt()) it.cancel()
         }
 
         listen<BlockBreakEvent> {

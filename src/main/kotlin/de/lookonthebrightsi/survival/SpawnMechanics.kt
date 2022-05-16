@@ -22,4 +22,4 @@ fun Location.inRegion(spawnPos1: Location, spawnPos2: Location, ignoreY: Boolean
     return x1 < x && x < x2 && (ignoreY || (y1 < y && y < y2)) && z1 < z && z < z2
 }
 
-fun Location.inSpawnProt() = world.spawnLocation.toVector().apply { y = 0.0 }.distance(toVector().apply { y = 0.0 }) <= Config.SPAWN_PROT_RADIUS.getInt()
+fun Location.inSpawnProt() = world.spawnLocation.toVector().apply { y = 0.0 }.distance(toVector().apply { y = 0.0 }) <= Config.SPAWN_PROT_RADIUS.getInt() && world.name == "world"
