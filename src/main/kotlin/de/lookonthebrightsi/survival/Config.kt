@@ -18,7 +18,7 @@ enum class Config(private val path: String, value: Any) {
     TELEPORTER_PARTICLES("teleporter_particles", 10),
     TELEPORTER_PARTICLES_SPEED("teleporter_particles_speed", 5),
     TELEPORTER_PARTICLES_INTERVAL("teleporter_particles_interval", 10),
-    TELEPORTER_PARTICLE_TYPES("teleporter_particles_types", listOf("ENCHANTING_TABLE")),
+    TELEPORTER_PARTICLE_TYPES("teleporter_particles_types", listOf("ENCHANTMENT_TABLE")),
     WITHER_SKELETON_OFFSET("wither_skeleton_offset", 4),
     WITHER_SKELETON_Y_OFFSET("wither_skeleton_y_offset", -1.8),
     ;

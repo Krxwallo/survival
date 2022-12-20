@@ -49,11 +49,11 @@ object SpawnManager {
         }
 
         listen<PlayerBucketEmptyEvent> {
-            if (it.blockClicked.location.inSpawnProt()) it.cancel()
+            if (it.block.location.inSpawnProt() && it.player.gameMode == GameMode.SURVIVAL) it.cancel()
         }
 
         listen<PlayerBucketFillEvent> {
-            if (it.blockClicked.location.inSpawnProt()) it.cancel()
+            if (it.block.location.inSpawnProt() && it.player.gameMode == GameMode.SURVIVAL) it.cancel()
         }
 
         listen<BlockPhysicsEvent> {
