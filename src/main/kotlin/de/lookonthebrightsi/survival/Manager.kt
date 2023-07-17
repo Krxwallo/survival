@@ -22,26 +22,27 @@ class InternalMainClass : KSpigot() {
         events()
 
         // Mechanics
-        SpawnManager
+        //SpawnManager
         ChatManager
         DeathCounter
         PlayerHeads
-        SwordFeature
-        ParticleFeature
-        WitherSkeletonFeature
+        SpawnLocationFix
+        //SwordFeature
+        //ParticleFeature
+        //WitherSkeletonFeature
     }
 
     fun reload() {
         reloadConfig()
-        SwordFeature.reload()
-        ParticleFeature.reload()
-        WitherSkeletonFeature.reload()
+        //SwordFeature.reload()
+        //ParticleFeature.reload()
+        //WitherSkeletonFeature.reload()
     }
 
     override fun shutdown() {
-        SwordFeature.shutdown()
-        ParticleFeature.shutdown()
-        WitherSkeletonFeature.shutdown()
+        //SwordFeature.shutdown()
+        //ParticleFeature.shutdown()
+        //WitherSkeletonFeature.shutdown()
     }
 
 }

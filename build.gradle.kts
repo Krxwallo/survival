@@ -1,10 +1,10 @@
 group = "de.lookonthebrightsi"
-version = "1.19.1"
-val kspigot = "1.19.1"
+version = "1.20.0"
+val kspigot = "1.20.1"
 val kutils = "1.0.0-beta"
 
 plugins {
-    kotlin("jvm") version "1.6.0"
+    kotlin("jvm") version "1.8.22"
     id("io.papermc.paperweight.userdev") version "1.4.0"
     id("net.minecrell.plugin-yml.bukkit") version "0.5.1"
 }
@@ -13,7 +13,7 @@ bukkit {
     main = "de.lookonthebrightsi.survival.InternalMainClass"
     website = "https://github.com/Krxwallo/survival"
     version = project.version.toString()
-    apiVersion = "1.19"
+    apiVersion = "1.20"
     authors = listOf("Krxwallo")
     libraries = listOf(
         "net.axay:kspigot:$kspigot",
@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-    paperDevBundle("1.19.3-R0.1-SNAPSHOT")
+    paperDevBundle("1.20.1-R0.1-SNAPSHOT")
     implementation("net.axay:kspigot:$kspigot")
     implementation("de.hglabor.utils:kutils:$kutils")
 }

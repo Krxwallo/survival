@@ -84,11 +84,6 @@ object SpawnManager {
             }
         }
 
-        listen<PlayerRespawnEvent> {
-            // Fix respawn location
-            it.player.bedSpawnLocation ?: run { it.respawnLocation = it.respawnLocation.world!!.spawnLocation.clone().add(0.5, 0, 0.5) }
-        }
-
         listen<BlockGrowEvent> {
             if  (it.block.location.inSpawnProt()) it.cancel()
         }
